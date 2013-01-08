@@ -5,7 +5,9 @@ html
         meta name="viewport" content="width=device-width, initial-scale=1.0"
 
         title Existed | Экзистенциальная игра
-
+        
+        script src="js/jquery.js"
+        script src="js/raphael.js"
         script src="js/existed.js"
 
         link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC' rel='stylesheet' type='text/css'
@@ -13,7 +15,34 @@ html
 
     body
         #wrapper
-            h1 Экзистенциальная игра
+            #existed
+                a href="#about"
+                    center
+                        img src="existed.jpeg"/
 
+            h1#about Экзистенциальная игра
             
-        #x
+            p 
+                | Привет! 
+                br
+                br
+                | Эта страница посвящена очень интересной игре, в которую я предлагаю тебе сыграть.
+                br
+                br
+                | Правила игры простые: ты собираешь небольшой круг близких друзей, и вы придумываете друг другу задания. После, каждый игрок отбирает себе <u><b>10 простых</b></u> и <u><b>10 сложных</b></u> заданий. Игра длится <u><b>три месяца</b></u>.
+                br
+                br
+                | По окончании трех месяцев каждый из игроков получает неимоверный профит в виде новых скилзов, опыта и прочих бонусов.
+                br
+                br
+                | Выигрывает тот, у кого больше всего выполненных заданий.
+                br
+                br
+                | По мере прохождения, каждый игрок должен отписываться в свой собственный <u><b>блог</b></u>. Будь то <a href="http://livejournal.com" target="blank">ЖЖ</a>, <a href="http://blogengine.ru" target="blank">Эгея</a>, <a href="https://github.com/malfermu/fizzy" target="blank">Физзи</a> и другие.
+                br
+                br
+                | Игра интересна сама по себе. Она позволяет уйти от быта, заставляет учиться контроллировать свое время и оценивать верно свои силы. Это хороший опыт и довольно интересно.
+                br
+                br
+                b Удачи в игра ;-)
+        #canvas_container

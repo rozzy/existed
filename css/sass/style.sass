@@ -1,3 +1,68 @@
+$defPX: 16px
+$defEM: 1.0em
+$defPC: 100%
+$defPT: 12pt
+
+$main-font: Lucida Sans Unicode, Lucida Grande, sans-serif
+$header-font: 'MS Serif', 'New York', sans-serif
+$mono-font:  'Trebuchet MS', Helvetica, sans-serif
+
+$color-blue: #3399CC
+
+$all-transition: all 0.7s ease-in-out
+
+@function n-un($num, $destination: em)
+    $origin: unit($num)
+    $defTYPE: $defPX
+    @if $origin == em
+        $defTYPE: $defEM
+    @else if $origin == "%"
+        $defTYPE: $defPC
+    @else if $origin == pt
+        $defTYPE: $defPT
+    @if $destination == em
+        @return ($num / $defTYPE) * $defEM
+    @else if $destination == pt
+        @return ($num / $defTYPE) * $defPT
+    @else if $destination == pc or $destination == "%"
+        @return ($num / $defTYPE) * $defPC
+    @else if $destination == px
+        @return ($num / $defTYPE) * $defPX
+
+@function gemicon($size, $row, $num)
+    @return "gemicons/#{$size}x#{$size}/row #{$row}/#{$num}.png"
+
+@mixin gemicon-make($size, $row, $num)
+    width: #{$size}px
+    height: #{$size}px
+    background: left top url(gemicon($size, $row, $num)) no-repeat
+    
+
+@mixin new-underline($color, $border-color: "same")
+    color: $color
+    text-decoration: none
+    $lightness: lightness($color)
+    lt: $lightness
+    $make-lighter: 35%
+    @if $lightness < 30%
+        $make-lighter: 70%
+    @else if $lightness >= 30%
+        $make-lighter: 35%
+    $border-bottom-color: $border-color
+    @if $border-color == "same"
+        $border-bottom-color: lighten($color, $make-lighter)
+    border-bottom: 1px solid $border-bottom-color
+    &:hover
+        color: darken($color, 10%)
+        border-bottom-color: darken($border-bottom-color, 20%) 
+
+@mixin transition ($transition)
+    transition: $transition
+    -webkit-transition: $transition
+    -moz-transition: $transition
+    -o-transition: $transition
+    
+
 @font-face
     font-family: 'Neucha'
     src: url('neucha-webfont.eot')
@@ -15,19 +80,71 @@ html *, body *
     outline: 0
 
 body
-    font-family: Neucha, 'MS Serif', 'New York', sans-serif
-    color: white
+    font-family: Neucha, 'Trebuchet MS', Helvetica, sans-serif
+    color: lighten(#191919, 10%)
     font-size: 16px
-    background: url(broken_noise.png)
+    background: #fff
+
+a   
+    @include new-underline ($color-blue)
+    
+    &:hover
+        @include new-underline (adjust-hue($color-blue, 20deg))
+    &:visited
+        @include new-underline (adjust-hue($color-blue, 90deg))
+    &:active
+        @include new-underline (adjust-hue($color-blue, 180deg))
+
+    &.no-style
+        text-decoration: none
+        border: 0
+        color: none
+        background: none
 
 #wrapper
     margin: 0 auto
     max-width: 800px 
-    padding: 15% 15px 0
+    padding: 5% 15px 0
+    position: relative
+    z-index: 2 
+
+    #existed
+        width: 100%
+        height: 100% 
+        max-width: 425px
+        max-height: 425px
+        text-align: center
+        display: inline
+        
+        img 
+            max-width: 100%
+            margin-bottom: 35px 
+
+    h1
+        color: #191919
+        font-size: 400%
+        text-align: center
+        margin-bottom: 20%
+        
+        @media screen and (max-width: 600px)
+            font-size: 24px
+            
+        @media screen and (max-width: 300px)
+            font-size: 16px
     
-h1
-    color: white
-    font-size: 400%
-    opacity: 0.5
-    text-align: center
-    margin-bottom: 10px
+    p
+        font-weight: 600 
+        margin-bottom: 20% 
+        @media screen and (max-width: 600px)
+            font-size: 14px
+        @media screen and (max-width: 300px)
+            font-size: 12px
+
+#canvas_container
+    background: transparent
+    position: absolute
+    z-index: 1
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
