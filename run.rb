@@ -15,8 +15,6 @@ Existed.new 'Блог Никитина Никиты', 'Existed.', 'Никити�
 
 get '/*.css' do
   css = params[:splat].first
-  # If there is a compiled one,
-  # take it. Otherwise, use SASS.
   style = "#{$styles}/#{css}.css"
   if File.exists? style
     return File.read style
