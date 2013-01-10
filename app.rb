@@ -4,6 +4,7 @@ require './settings'
 require 'sinatra'
 require 'slim'
 require 'sass'
+require 'mongoid'
 require_relative 'existed'
 
 # error { File.read $error }
@@ -11,6 +12,7 @@ set :public_folder, $public
 set :port, $port
 set :views, $views
 
+Mongoid.load! 'mongoid.yml'
 Existed.new 'Блог Никитина Никиты', 'Existed.', 'Никитин Никита'
 
 get '/*.css' do
