@@ -5,9 +5,21 @@ html
         meta name='viewport' content='width=device-width, initial-scale=1.0'
         title Экзистенциальная игра
         link rel='stylesheet' href='/style.css' type='text/css'
-
     body
-        #wrapper
-            #existed
-                center: img src='existed.jpg'
-            h1#about Экзистенциальная игра
+        #main-side
+            img.userpic src="http://my-art.biz/uploads/posts/2009-02/1234116129_kubizm.jpg"/
+            h1.maintitle Блог Никиты
+            p.about
+             | Existed.
+             
+            ul.top-links
+                li: a href="#tags" Теги
+                li: a href="#favs" Избранное
+                li: a.everything href="#list" Задания
+            #articles
+                .article
+                    h1.rtclttl.favorited
+                        img.img-fav src="#{@images}row 6/1.png"/ title="В избранном"
+                        a href="#" Егвений Алехин «Третья штанина»
+                    span.timeinfo 5 января, после полуночи
+                    p.rtclmsg Текст
