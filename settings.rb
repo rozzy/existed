@@ -2,7 +2,7 @@
 # Folders
 Dir["./code/*.rb"].each {|file| require file}
 $views = 'views'
-$styles = 'styles'
+$styles = 'css/sass'
 $public = 'public'
 
 # Variables
