@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title = ($f.title @id unless @id == '*') || $f.name
+    meta http-equiv='Content-Type' content='text/html; charset=utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    meta name='author' content='#{$f.author}'
+    meta name='description' content='#{$f.description}'
+    link rel='shortcut icon' href='/favicon.ico'
+    link rel='stylesheet' href='/fizzy.css'
+    link rel='alternate' type='application/rss+xml' title='#{$f.name}' href='#{$f.url}rss/'
+    link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Mono|PT+Serif:400,700,400italic,700italic&subset=latin,cyrillic'
+    script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.mаin.js'
+    script src='/main.js'
+    / Jouele
+    link rel='stylesheet' href='/jouele/jouele.css'
+    link id='jouele-swf-object' href='http://raw.github.com/happyworm/jplayer/master/jquery.jplayer/Jplayer.swf'
+    script src='http://raw.github.com/happyworm/jplayer/master/jquery.jplayer/jquery.jplayer.js'
+    script src='http://raw.github.com/ilyabirman/jouele/master/jouele/jouele.js'
+  body
+    / Header
+    - if @id == '*' and @page == 1
+      .header = $f.name
+    - else
+      .header: a href='#{$f.url}' = $f.name
+    / Previous page
+    - unless @page == 1
+      .nav.prev: a href="#{$f.link @page.pred, '~'}" = "№#{@page.pred}"
+    / Content
+    .page
+      - $f.show(@id, @page).each do |path|
+        .post == $f.post path, @id
+    / Next page
+    - if $f.check(@id, @page)
+      .nav.next: a href="#{$f.link @page.next, '~'}" = "№#{@page.next}"
+    br
