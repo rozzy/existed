@@ -29,7 +29,7 @@ get '/*.css' do
   if File.exists? style
     return File.read style
   end
-  sass css.to_sym, {views: $styles}
+  sass css.to_sym, {views: "#{$styles}/sass"}
 end
 
 get '/' do
@@ -39,4 +39,8 @@ end
 get '/*/?' do
   page = params[:splat].first
   slim page.to_sym
+end
+
+post '/settings/' do
+  p params
 end
