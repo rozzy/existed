@@ -3,6 +3,7 @@ Dir.chdir File.dirname(__FILE__)
 require 'bundler/setup'
 Bundler.require :default
 
+Mongoid.load!('./mongo.yml', :development)
 Dir["./code/*.rb"].each {|file| require file}
 set :styles, 'styles'
 set :views, 'views'
