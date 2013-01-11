@@ -1,4 +1,4 @@
-- @images = "/gemicons/16x16/"
+- @images = "/gemicons/"
 doctype html
 html
     head
@@ -19,16 +19,19 @@ html
                 li: a.everything href="#list" Задания
             #articles
                 - if $articles.empty?
-                    p Заметок нет
+                    p style="margin-top: 30px" 
+                        img src="#{@images}32x32/row 4/1.png" valign="middle" style="margin-top: -3px;width: 20px;margin-left: -29px;margin-right:10px"
+                        |Заметок нет
                 - else
                     - $articles.each do |article|
+                        = article
                         .article
-                            - if article[:fav] == 1
-                                h1.rtclttl.favorited
-                                    img.img-fav src="#{@images}row 6/1.png"/ title="В избранном"
-                                    a href="#{article[:url]}" #{article[:title]}
-                            - else
-                                h1.rtclttl
-                                    a href="#{article[:url]}" #{article[:title]}
-                            span.timeinfo #{article[:date]}
-                            p.rtclmsg #{article[:text]}
+                            /- if article[:fav] == 1
+                            /    h1.rtclttl.favorited
+                            /        img.img-fav src="#{@images}16x16/row 6/1.png"/ title="В избранном"
+                            /        a href="#{article[:url]}" #{article[:title]}
+                            /- else
+                            /    h1.rtclttl
+                            /        a href="#{article[:url]}" #{article[:title]}
+                            /span.timeinfo #{article[:date]}
+                            /p.rtclmsg #{article[:text]}

@@ -2,17 +2,17 @@
 Dir.chdir File.dirname(__FILE__)
 require './settings'
 require 'sinatra'
+require 'sinatra/redis'
 require 'slim'
 require 'sass'
-require 'mongoid'
 require_relative 'existed'
 
+set :redis, 'redis://localhost:6379'
 # error { File.read $error }
-set :public_folder, $public
+set :public_folder, $public 
 set :port, $port
 set :views, $views
 
-Mongoid.load! 'mongoid.yml'
 Existed.new 'Блог Никитина Никиты', 'Existed.', 'Никитин Никита'
 
 get '/*.css' do

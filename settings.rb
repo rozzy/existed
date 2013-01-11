@@ -8,3 +8,4 @@ $public = 'public'
 # Variables
 $error = "#{$views}/error.html"
 $port = 1488
+$per_page = 10
