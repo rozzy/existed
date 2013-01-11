@@ -6,6 +6,11 @@ get '/*.css' do |css|
     .merge(views: settings.styles, output: :compressed)
 end
 
+get '/*/rss/?' do |u|
+  @user = u
+  builder :rss
+end
+
 get '/*/?' do |u|
   @user = u
   slim :blog
