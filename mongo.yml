@@ -1,2 +1,8 @@
 production:
   uri: <%= ENV['MONGOLAB_URI'] %>
+development:
+  sessions:
+    default:
+      database: mongoid
+      hosts:
+        - localhost:27017
