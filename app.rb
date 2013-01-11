@@ -6,13 +6,11 @@ get '/*.css' do |css|
     .merge(views: settings.styles, output: :compressed)
 end
 
-get '/' do
-  slim :index
+get '/*/?' do |u|
+  @user = u
+  slim :blog
 end
 
-# Slim & HTML
-get '/*/?' do |page|
-  html = "#{settings.views}/#{page}.html"
-  return File.read(html) if File.exists?(html)
-  slim :"#{page}"
+get '/' do
+  slim :index
 end
