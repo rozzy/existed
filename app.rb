@@ -13,7 +13,13 @@ set :public_folder, $public
 set :port, $port
 set :views, $views
 
-Existed.new 'Блог Никитина Никиты', 'Existed.', 'Никитин Никита'
+class Object
+  def start!
+    self.new
+  end
+end
+
+Existed.start!
 
 get '/*.css' do
   css = params[:splat].first
