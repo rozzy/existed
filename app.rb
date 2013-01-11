@@ -1,46 +1,18 @@
-# encoding: utf-8
-Dir.chdir File.dirname(__FILE__)
-require './settings'
-require 'sinatra'
-require 'sinatra/redis'
-require 'slim'
-require 'sass'
-require_relative 'existed'
-
-set :redis, 'redis://localhost:6379'
-# error { File.read $error }
-set :public_folder, $public 
-set :port, $port
-set :views, $views
-
-class Object
-  def start!
-    self.new
-  end
-end
-
-Existed.start!
-
-get '/*.css' do
-  css = params[:splat].first
-  # If there is a compiled one,
-  # take it. Otherwise, use SASS.
-  style = "#{$styles}/#{css}.css"
-  if File.exists? style
-    return File.read style
-  end
-  sass css.to_sym, {views: "#{$styles}/sass"}
+# SASS/Compass & CSS
+get '/*.css' do |css|
+  style = "#{settings.styles}/#{css}.css"
+  return File.read(style) if File.exists?(style)
+  sass :"#{css}", Compass.sass_engine_options
+    .merge(views: settings.styles, output: :compressed)
 end
 
 get '/' do
   slim :index
 end
 
-get '/*/?' do
-  page = params[:splat].first
-  slim page.to_sym
-end
-
-post '/settings/' do
-  p params
+# Slim & HTML
+get '/*/?' do |page|
+  html = "#{settings.views}/#{page}.html"
+  return File.read(html) if File.exists?(html)
+  slim :"#{page}"
 end
