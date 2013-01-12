@@ -4,11 +4,13 @@ require 'bundler/setup'
 Bundler.require :default
 
 #set :database, ENV['DATABASE_URL'] || 'postgres://localhost/existed'
-ActiveRecord::Base.establish_connection(:adapter => "postgresql",
-                                        :username => "berozzy",
-                                        :password => "",
-                                        :database => "existed")
-
+conn = PG.connect( dbname: 'existed' )
+conn.exec( "SELECT url, title, username FROM users" ) do |result|
+  puts "     url | title             | username"
+  result.each do |row|
+    puts row['url'] + ', ' + row['title'] + ', ' + row['username']
+  end
+end
 #Mongoid.load!('./mongo.yml', :development)
 Dir["./code/*.rb"].each {|file| require file}
 set :styles, 'styles'
