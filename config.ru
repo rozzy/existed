@@ -3,7 +3,13 @@ Dir.chdir File.dirname(__FILE__)
 require 'bundler/setup'
 Bundler.require :default
 
-Mongoid.load!('./mongo.yml', :development)
+#set :database, ENV['DATABASE_URL'] || 'postgres://localhost/existed'
+ActiveRecord::Base.establish_connection(:adapter => "postgresql",
+                                        :username => "berozzy",
+                                        :password => "",
+                                        :database => "existed")
+
+#Mongoid.load!('./mongo.yml', :development)
 Dir["./code/*.rb"].each {|file| require file}
 set :styles, 'styles'
 set :views, 'views'

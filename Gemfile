@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'mongoid'
+gem 'pg'
 gem 'thin'
 gem 'slim'
 gem 'compass'
-gem 'builder'
+gem 'builder', '~> 3.0.0'
+gem 'shotgun'

@@ -11,11 +11,11 @@ get '/*/rss/?' do |u|
   builder :rss
 end
 
+get '/' do
+  slim :index
+end
+
 get '/*/?' do |u|
   @user = u
   slim :blog
-end
-
-get '/' do
-  slim :index
 end
