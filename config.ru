@@ -4,13 +4,14 @@ require 'bundler/setup'
 require 'digest/sha1'
 Bundler.require :default
 
-Dir["./code/*.rb"].each {|file| require file}
 set :styles, 'styles'
 set :views, 'views'
 set :blogs, 'blogs'
 set :posts, 'posts'
 set :public_folder, 'public'
 set :show_exceptions, true
+
+Dir["./code/*.rb"].each {|file| require file}
 
 require './app'
 run Sinatra::Application

@@ -3,7 +3,11 @@ require 'date'
 class Existed # Fizzy
   attr_reader :name, :author, :description, :url
 
-  def initialize name, author, description, per = 10, url = '/blog/', posts = 'posts', dump = 'timestamps.yml'
+  def initialize @user, @url = ''
+    Psych.load_file :blogs.to_s + '/' + @user + '/info.yml'
+  end
+
+  def start name, author, description, per = 10, url = '/blog/', posts = 'posts', dump = 'timestamps.yml'
     @posts, @url, @per, @dump = posts, url, per, dump # Kinda obvious, huh?
     @name, @author, @description = name, author, description
     @time = (Psych.load_file @dump if File.exists? @dump) || {}

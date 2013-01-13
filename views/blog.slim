@@ -22,9 +22,6 @@ html
       .header = $blog.data('title')
     - else
       .header: a href='#{$blog.data('url')}' = $blog.data('name')
-    / Previous page
-    - unless @page == 1
-      .nav.prev: a href="#{$blog.data('link') @page.pred, '~'}" = "№#{@page.pred}"
     / Content
 
     = @url
