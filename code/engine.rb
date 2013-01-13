@@ -1,16 +1,16 @@
 require 'date'
 
-class Existed # Fizzy
+class Existed
   attr_reader :name, :author, :description, :url
 
-  def initialize @user, @url = ''
-    Psych.load_file :blogs.to_s + '/' + @user + '/info.yml'
+  def initialize user, url
+    @data = Psych.load_file :blogs.to_s + '/' + user + '/info.yml'
+    timestamps = :blogs.to_s + '/' + user + '/timestamps.yml'
+    @time = (Psych.load_file timestamps if File.exists? timestamps) || {}
   end
 
-  def start name, author, description, per = 10, url = '/blog/', posts = 'posts', dump = 'timestamps.yml'
-    @posts, @url, @per, @dump = posts, url, per, dump # Kinda obvious, huh?
-    @name, @author, @description = name, author, description
-    @time = (Psych.load_file @dump if File.exists? @dump) || {}
+  def data param
+    return @data[param]
   end
 
   def title id
