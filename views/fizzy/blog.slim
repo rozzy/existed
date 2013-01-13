@@ -18,10 +18,10 @@ html
     /script src='http://raw.github.com/ilyabirman/jouele/master/jouele/jouele.js'
   body
     / Header
-    - if @url == ''
+    - if @post == ''
       .header = $blog.data('title')
     - else
       .header: a href='/#{$blog.data('url')}' = $blog.data('title')
     / Content
 
-    = @post
+    = $blog.show @post, @page

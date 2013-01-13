@@ -11,7 +11,7 @@ class Existed
     @time = (Psych.load_file timestamps if File.exists? timestamps) || {}
     $theme = @data['theme'] || $theme
     set :views, "views/#{$theme}"
-    @posts = :blogs.to_s + '/' + user + '/' + @posts.to_s
+    @posts = :blogs.to_s + '/' + user + '/' + :posts.to_s
   end
 
   def data param
@@ -35,16 +35,20 @@ class Existed
   end
 
   def show id, page = 1
-    all = Dir["#{@posts}/#{id}"]
-    all.sort_by! do |file|
-      if @time[file].nil?
-        @time[file] = Time.now.to_i 
-        File.write @dump, Psych.dump(@time)
-      end; -@time[file]
+    all = Dir.new("#{@posts}/#{id}")
+    all.each do |file|
+      if File.file? file
+        if @time[file].nil?
+          @time[file] = Time.now.to_i 
+          File.write @dump, Psych.dump(@time)
+        end; -@time[file]
+      end
     end
+    all.sort_by!
     raise "No posts found: #{id}" if all.empty?
     those = page.pred * @per...page * @per
-  all[those]; end
+    all[those]; 
+  end
 
   def check id, page
     # Checks if the page exists
