@@ -3,12 +3,15 @@ get '/*.css' do |css|
   style = "#{settings.styles}/#{css}.css"
   return File.read(style) if File.exists?(style)
   sass :"#{css}", Compass.sass_engine_options
-    .merge(views: settings.styles, output: :compressed)
+    .merge(views: settings.styles, output: :compressed) 
 end
 
 get '/*/rss/?' do |u|
-  @user = u
-  builder :rss
+  if File.directory? :blogs.to_s + '/' + u
+    builder :rss
+  else
+    redirect '/'
+  end
 end
 
 get '/' do
