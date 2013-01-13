@@ -7,6 +7,8 @@ Bundler.require :default
 Dir["./code/*.rb"].each {|file| require file}
 set :styles, 'styles'
 set :views, 'views'
+set :blogs, 'blogs'
+set :posts, 'posts'
 set :public_folder, 'public'
 set :show_exceptions, true
 

@@ -1,6 +1,6 @@
 require 'date'
 
-class Fizzy
+class Existed # Fizzy
   attr_reader :name, :author, :description, :url
 
   def initialize name, author, description, per = 10, url = '/blog/', posts = 'posts', dump = 'timestamps.yml'
