@@ -4,8 +4,9 @@ require 'bundler/setup'
 require 'digest/sha1'
 Bundler.require :default
 
+$theme = 'fizzy'
+
 set :styles, 'styles'
-set :views, 'views'
 set :blogs, 'blogs'
 set :posts, 'posts'
 set :public_folder, 'public'

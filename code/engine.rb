@@ -7,6 +7,8 @@ class Existed
     @data = Psych.load_file :blogs.to_s + '/' + user + '/info.yml'
     timestamps = :blogs.to_s + '/' + user + '/timestamps.yml'
     @time = (Psych.load_file timestamps if File.exists? timestamps) || {}
+    $theme = @data['theme'] || "fizzy"
+    set :views, "views/#{$theme}"
   end
 
   def data param

@@ -12,10 +12,10 @@ html
     script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.mаin.js'
     script src='/script.js'
     / Jouele
-    link rel='stylesheet' href='/jouele/jouele.css'
-    link id='jouele-swf-object' href='http://raw.github.com/happyworm/jplayer/master/jquery.jplayer/Jplayer.swf'
-    script src='http://raw.github.com/happyworm/jplayer/master/jquery.jplayer/jquery.jplayer.js'
-    script src='http://raw.github.com/ilyabirman/jouele/master/jouele/jouele.js'
+    /link rel='stylesheet' href='/jouele/jouele.css'
+    /link id='jouele-swf-object' href='http://raw.github.com/happyworm/jplayer/master/jquery.jplayer/Jplayer.swf'
+    /script src='http://raw.github.com/happyworm/jplayer/master/jquery.jplayer/jquery.jplayer.js'
+    /script src='http://raw.github.com/ilyabirman/jouele/master/jouele/jouele.js'
   body
     / Header
     - if @url == ''
@@ -24,4 +24,4 @@ html
       .header: a href='/#{$blog.data('url')}' = $blog.data('title')
     / Content
 
-    = $content
+    = @url

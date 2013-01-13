@@ -1,0 +1,5 @@
+- if @url == ''
+    .header = $blog.data('title')
+- else
+    .header: a href='/#{$blog.data('url')}' = $blog.data('title')
+= @url
