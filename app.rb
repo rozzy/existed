@@ -21,13 +21,4 @@ end
 
 get %r{/(^[a-zA-Z0-9_]+)$/?} do |u|  
     @url = u
-    $db.exec( "SELECT title, description, username, password FROM users WHERE url = '#{u}' LIMIT 1" ) do |result|
-    if result.count > 0
-        $blog = result[0]
-        $blog['password'] = Digest::SHA1.hexdigest $blog['password']
-        slim :blog
-    else
-        redirect '/'
-    end
-  end
 end

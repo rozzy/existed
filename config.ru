@@ -4,8 +4,6 @@ require 'bundler/setup'
 require 'digest/sha1'
 Bundler.require :default
 
-$db = PG.connect( dbname: 'existed' )
-
 Dir["./code/*.rb"].each {|file| require file}
 set :styles, 'styles'
 set :views, 'views'
