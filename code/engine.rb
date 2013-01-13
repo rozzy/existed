@@ -1,14 +1,17 @@
 require 'date'
+require 'psych'
+require 'town'
 
 class Existed
   attr_reader :name, :author, :description, :url
 
-  def initialize user, url
+  def initialize user, post = ''
     @data = Psych.load_file :blogs.to_s + '/' + user + '/info.yml'
     timestamps = :blogs.to_s + '/' + user + '/timestamps.yml'
     @time = (Psych.load_file timestamps if File.exists? timestamps) || {}
     $theme = @data['theme'] || $theme
     set :views, "views/#{$theme}"
+    @posts = :blogs.to_s + '/' + user + '/' + @posts.to_s
   end
 
   def data param
