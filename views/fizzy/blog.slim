@@ -24,4 +24,5 @@ html
       .header: a href='/#{$blog.data('url')}' = $blog.data('title')
     / Content
 
-    = $blog.show @post, @page
+    - $blog.show(@post, @page).each do |post|
+        == $blog.post post, @post

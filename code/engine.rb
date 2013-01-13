@@ -7,8 +7,8 @@ class Existed
 
   def initialize user, post = ''
     @data = Psych.load_file :blogs.to_s + '/' + user + '/info.yml'
-    timestamps = :blogs.to_s + '/' + user + '/timestamps.yml'
-    @time = (Psych.load_file timestamps if File.exists? timestamps) || {}
+    @timestamps = :blogs.to_s + '/' + user + '/timestamps.yml'
+    @time = (Psych.load_file @timestamps if File.exists? @timestamps) || {}
     $theme = @data['theme'] || $theme
     set :views, "views/#{$theme}"
     @posts = :blogs.to_s + '/' + user + '/' + :posts.to_s
@@ -36,18 +36,21 @@ class Existed
 
   def show id, page = 1
     all = Dir.new("#{@posts}/#{id}")
-    all.each do |file|
+    posts = []
+    all.each do |filename|
+      file = "#{@posts}/#{id}" + filename
       if File.file? file
-        if @time[file].nil?
-          @time[file] = Time.now.to_i 
-          File.write @dump, Psych.dump(@time)
-        end; -@time[file]
+        if @time[filename].nil?
+          @time[filename] = Time.now.to_i 
+          File.write @timestamps, Psych.dump(@time)
+        end; 
+        -@time[filename]
+        posts << file
       end
     end
-    all.sort_by!
-    raise "No posts found: #{id}" if all.empty?
-    those = page.pred * @per...page * @per
-    all[those]; 
+    raise "No posts found: #{id}" if posts.empty?
+    those = page.pred * $per_page...page * $per_page
+    posts[those]
   end
 
   def check id, page

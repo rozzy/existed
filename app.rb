@@ -21,9 +21,22 @@ end
 not_found do
     redirect '/'
 end
+
   # '/*/*?'
-get %r{/([a-zA-Z0-9\-_]+)/?(.*|~[0-9]+)?} do |user, post|
+get %r{/([a-zA-Z0-9\-_]+)/?(.*)?} do |user, post|
   @user, @post = user, post
+  if File.directory? :blogs.to_s + '/' + @user
+    $blog = Existed.new @user, @post
+    @page = 1
+    slim :blog
+  else
+    redirect '/'
+  end
+end
+
+
+get '/*/~*/?' do |user, page|
+  @user, @page = user, page.to_i
   if File.directory? :blogs.to_s + '/' + @user
     $blog = Existed.new @user, @post
     slim :blog
