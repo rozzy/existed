@@ -15,10 +15,11 @@ get '/' do
   slim :index
 end
 
-not_found do
-    redirect '/'
-end
+# not_found do
+#     redirect '/'
+# end
 
-get %r{/(^[a-zA-Z0-9_]+)$/?} do |u|  
-    @url = u
+get %r{/([a-zA-Z0-9-_]+)/?} do |u|  
+  @url = u
+  p @url
 end
