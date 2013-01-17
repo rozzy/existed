@@ -4,9 +4,8 @@ require 'bundler/setup'
 Bundler.require :default
 
 Dir["./code/*.rb"].each {|file| require file}
-set :public_folder, 'public'
-set :styles, 'styles'
-set :posts, 'posts'
+set :public_folder, 'pages'
+set :views, 'pages'
 
 # Run, Foster, run!
 set :port, 2222
