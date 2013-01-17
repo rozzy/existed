@@ -1,19 +1,18 @@
 # encoding: utf-8
 Dir.chdir File.dirname(__FILE__)
 require 'bundler/setup'
-require 'digest/sha1'
 Bundler.require :default
 
-$theme = 'fizzy'
-$per_page = 10 
-
-set :styles, 'styles'
-set :blogs, 'blogs'
-set :posts, 'posts'
-set :public_folder, 'public'
-set :show_exceptions, true
-
 Dir["./code/*.rb"].each {|file| require file}
+set :public_folder, 'public'
+set :styles, 'styles'
+set :posts, 'posts'
 
+# Run, Foster, run!
+set :port, 2222
 require './app'
-run Sinatra::Application
+
+configure :production do
+  set :show_exceptions, false
+  run Sinatra::Application
+end
