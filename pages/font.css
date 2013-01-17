@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'Neucha';
-    src: url('/neucha/font.eot'),
-    url('/neucha/font.eot?#iefix') format('embedded-opentype'),
-    url('/neucha/font.woff') format('woff'),
-    url('/neucha/font.ttf') format('truetype'),
-    url('/neucha/font.svg#neucharegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Neucha';
+  src: url('/neucha/font.eot'),
+  url('/neucha/font.eot?#iefix') format('embedded-opentype'),
+  url('/neucha/font.woff') format('woff'),
+  url('/neucha/font.ttf') format('truetype'),
+  url('/neucha/font.svg#neucharegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
